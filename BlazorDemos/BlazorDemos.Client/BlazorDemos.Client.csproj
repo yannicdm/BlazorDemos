@@ -15,4 +15,16 @@
     <ProjectReference Include="..\BlazorDemos.Shared\BlazorDemos.Shared.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <BlazorGenerate Remove="Pages\Timer.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Pages\Timer.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Pages\Timer.cshtml" />
+  </ItemGroup>
+
 </Project>

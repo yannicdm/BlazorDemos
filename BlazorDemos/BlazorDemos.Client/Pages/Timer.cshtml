@@ -1,0 +1,26 @@
+﻿@page  "/timer"
+@implements IDisposable
+@using System.Threading
+
+<h1>Seconds this page is showing: @Counter</h1>
+
+@functions {
+
+    public int Counter { get; set; }
+
+    private Timer t;
+
+    protected override void OnInit()
+    {
+      t = new Timer((_) => {
+        Counter += 1;
+        this.StateHasChanged();
+      }, null, TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(1));
+    }
+
+    public void Dispose()
+    {
+      t?.Dispose();
+    }
+
+}

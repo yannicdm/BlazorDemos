@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27520.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorDemos.Server", "BlazorDemos\BlazorDemos.Server\BlazorDemos.Server.csproj", "{B0098ECF-0417-4948-9C76-0971A742EB82}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorDemos.Server", "BlazorDemos\BlazorDemos.Server\BlazorDemos.Server.csproj", "{B0098ECF-0417-4948-9C76-0971A742EB82}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorDemos.Client", "BlazorDemos\BlazorDemos.Client\BlazorDemos.Client.csproj", "{C99DB124-C296-424A-AFD4-C38119DE8BB7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorDemos.Client", "BlazorDemos\BlazorDemos.Client\BlazorDemos.Client.csproj", "{C99DB124-C296-424A-AFD4-C38119DE8BB7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorDemos.Shared", "BlazorDemos\BlazorDemos.Shared\BlazorDemos.Shared.csproj", "{16D92A1C-8EF3-457A-A283-CEE1113B0DAD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorDemos.Shared", "BlazorDemos\BlazorDemos.Shared\BlazorDemos.Shared.csproj", "{16D92A1C-8EF3-457A-A283-CEE1113B0DAD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
