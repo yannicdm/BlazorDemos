@@ -1,15 +1,23 @@
 ﻿@page "/counter"
 <h1>Counter</h1>
 
+<input type="number" @bind(Increment) />
 <p>Current count: @currentCount</p>
+
+<div class="progress">
+    <div class="progress-bar bg-success progress-bar-striped" style="width:@currentCount%">@currentCount%</div>
+</div>
 
 <button @onclick(IncrementCount)>Click me</button>
 
 @functions {
     int currentCount = 0;
+    int increment = 1;
+
+    public string Increment { get; set; }
 
     void IncrementCount()
     {
-        currentCount++;
+      currentCount  = Math.Min( currentCount + int.Parse(Increment), 100);
     }
 }
