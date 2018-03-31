@@ -24,7 +24,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Pages\Interop.cshtml" />
     <None Include="Pages\Timer.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="Pages\Interop.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Pages\Interop.cshtml" />
   </ItemGroup>
 
 </Project>

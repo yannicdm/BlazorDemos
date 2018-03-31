@@ -1,0 +1,69 @@
+﻿@page "/interop"
+
+@using Microsoft.AspNetCore.Blazor.Browser.Interop
+
+<script>
+  // Register a very simple JavaScript function that just prints
+  // the input parameter to the browser's console
+  Blazor.registerFunction('say', (data) => {
+    console.dir(data);
+    // Your function currently has to return something. For demo
+    // purposes, we just return `true`.
+    return true;
+  });
+</script>
+
+<div class="row">
+  <div class="col">
+    <button @onclick(CallJS) class="btn btn-success">Call Javascript</button>
+  </div>
+  <div class="col">
+    <button class="btn btn-info" id="callCS">@Var</button>
+  </div>
+</div>
+
+<script>
+  var btn = document.getElementById('callCS');
+  btn.addEventListener('click', function (event) {
+    console.log('Clicky');
+    const assemblyName = 'BlazorDemos.Client';
+    const namespace = 'BlazorDemos.Client.Pages';
+    const typeName = 'Interop';
+    const methodName = 'SetVariable';
+
+    const setVarMethod = Blazor.platform.findMethod(assemblyName, namespace, typeName, methodName);
+    // console.log(setVarMethod);
+    Blazor.platform.callMethod(setVarMethod, null, [Blazor.platform.toDotNetString('Yeah!')]);
+  }, false);
+</script>
+@functions  { 
+    private static Action<string> update;
+
+    protected override void OnInit()
+    {
+      base.OnInit();
+      update = (value) =>
+      {
+        this.Var = value;
+        this.StateHasChanged();
+      };
+    }
+
+    public void CallJS()
+    {
+      if (RegisteredFunction.Invoke<bool>("say", "Bonjour Blazor"))
+      {
+        Console.WriteLine("Called JavaScript");
+      }
+
+      RegisteredFunction.Invoke<bool>("say", new { greeting = "Dag Blazor" });
+    }
+
+    public string Var { get; set; } = "Call C#";
+
+    public static void SetVariable(string message)
+    {
+      update(message);
+    }
+
+}

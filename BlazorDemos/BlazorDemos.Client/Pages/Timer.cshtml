@@ -1,6 +1,5 @@
 ﻿@page  "/timer"
 @implements IDisposable
-@using System.Threading
 
 <h1>Seconds this page is showing: @Counter</h1>
 
@@ -8,11 +7,11 @@
 
     public int Counter { get; set; }
 
-    private Timer t;
+    private System.Threading.Timer t;
 
     protected override void OnInit()
     {
-      t = new Timer((_) => {
+      t = new System.Threading.Timer((_) => {
         Counter += 1;
         this.StateHasChanged();
       }, null, TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(1));
