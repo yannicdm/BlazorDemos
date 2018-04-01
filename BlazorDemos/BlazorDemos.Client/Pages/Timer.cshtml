@@ -13,6 +13,7 @@
     {
       t = new System.Threading.Timer((_) => {
         Counter += 1;
+        Console.WriteLine($"Counter has been updated to {Counter}. Calling StateHasChanged()");
         this.StateHasChanged();
       }, null, TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(1));
     }
