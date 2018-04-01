@@ -1,0 +1,56 @@
+﻿@page "/pizza"
+@using BlazorDemos.Shared
+
+@inject Store state
+
+<div class="row pizza-header">
+  <div class="col-sm-3">
+    <img src="images/pizza.png" class="center-block" />
+  </div>
+  <div class="col-sm-6">
+    <h1 class="text-center">@state.PizzaPlace.Owner's Pizza Place</h1>
+  </div>
+  <div class="col-sm-3">
+    <img src="images/pizza.png" class="center-block" />
+  </div>
+</div>
+
+<div class="row">
+  <button class="btn btn-success" @onclick(OpenEditor)>Add</button>
+</div>
+
+@if (state.UI.ShowPizzaEditor)
+{
+  <PizzaEditor Pizza="state.PizzaPlace.Pizza"
+               SpicynessValues="state.UI.SpicynessValues"
+               OnClose="CloseEditor"></PizzaEditor>
+}
+
+@functions  {
+
+    protected override void OnInit()
+    {
+      base.OnInit();
+
+      state.UI.UpdateUI = () => this.StateHasChanged();
+    }
+
+    void OpenEditor()
+    {
+      state.UI.ShowPizzaEditor = true;
+    }
+
+    void CloseEditor(Pizza pizza)
+    {
+      state.UI.ShowPizzaEditor = false;
+      if( pizza != null )
+      {
+        Console.WriteLine($"Added pizza {state.PizzaPlace.Pizza.Name} - {state.PizzaPlace.Pizza.Spicyness} - {state.PizzaPlace.Pizza.Quantity}");
+
+      } else
+      {
+        Console.WriteLine("Cancelled pizza");
+      }
+      state.StateHasChanged();
+    }
+}

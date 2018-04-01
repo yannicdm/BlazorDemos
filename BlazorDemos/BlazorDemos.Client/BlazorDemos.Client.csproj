@@ -25,6 +25,8 @@
 
   <ItemGroup>
     <None Include="Pages\Interop.cshtml" />
+    <None Include="Pages\PizzaPlace.cshtml" />
+    <None Include="Pages\PizzaEditor.cshtml" />
     <None Include="Pages\Timer.cshtml" />
   </ItemGroup>
 
@@ -34,6 +36,22 @@
 
   <ItemGroup>
     <Content Remove="Pages\Interop.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\images\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="Pages\PizzaEditor.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Pages\PizzaEditor.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="Pages\PizzaPlace.cshtml" />
   </ItemGroup>
 
 </Project>

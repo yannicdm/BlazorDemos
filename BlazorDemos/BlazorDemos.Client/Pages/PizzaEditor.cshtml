@@ -1,0 +1,51 @@
+﻿@using BlazorDemos.Shared
+
+<div class="row">
+  <div class="col">
+    <h2>Add a pizza</h2>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-4">
+    <div class="form-group">
+      <label for="pizza-name">Name</label>
+      <input id="pizza-name" type="text" @bind(Pizza.Name)>
+    </div>
+  </div>
+  <div class="col-sm-2">
+    <label for="pizza-spicyness">Spicyness</label>
+    <select id="pizza-spicyness" @bind(Pizza.Spicyness)>
+      @foreach (var spicy in SpicynessValues)
+      {
+        <option value="@spicy">@spicy.ToString()</option>
+      }
+    </select>
+  </div>
+  <div class="col-sm-3">
+    <div class="form-group">
+      <label for="pizza-qty">Qty</label>
+      <input id="pizza-qty" type="number" maxlength="2" @bind(Pizza.Quantity)>
+    </div>
+  </div>
+  <div class="col-sm-1"> <!--filler--> </div>
+  <div class="col-sm-1">
+    <button class="btn btn-success" @onclick(AddPizza)>Add</button>
+  </div>
+  <div class="col-sm-1">
+    <button class="btn btn-failure" @onclick(Cancel)>Cancel</button>
+  </div>
+</div>
+
+
+@functions {
+    public Pizza Pizza { get; set; }
+
+    public IEnumerable<Spicyness> SpicynessValues { get; set; }
+
+    public Action<Pizza> OnClose { get; set; }
+
+    void AddPizza() => OnClose(Pizza);
+
+    void Cancel() => OnClose(null);
+
+}
