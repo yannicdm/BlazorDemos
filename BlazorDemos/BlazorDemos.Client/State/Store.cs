@@ -14,6 +14,8 @@ namespace BlazorDemos.Client.State {
 
       public Action UpdateUI { get; set; }
 
+      public bool ShowLoading { get; set; }
+
       public UIModel()
       {
         SpicynessValues = Enum.GetValues(typeof(Spicyness))
@@ -25,7 +27,22 @@ namespace BlazorDemos.Client.State {
 
       public string Owner { get; set; } = "Jefke";
 
-      public Pizza Pizza { get; set; } = new Pizza();
+      public IEnumerable<string> PizzaNames { get; set; } = new List<string> { "Loading" };
+
+      public List<Pizza> Orders { get; set; } = new List<Pizza>();
+
+      public Pizza Pizza { get; set; } 
+
+      public void OrderPizza()
+      {
+        this.Orders.Add(this.Pizza);
+        InitPizza();
+      }
+
+      public void InitPizza()
+      {
+        Pizza = new Pizza() { Name = PizzaNames.First(), Quantity = 1, Spicyness = Spicyness.Bland };
+      }
     }
 
     public UIModel UI { get; set; } = new UIModel {

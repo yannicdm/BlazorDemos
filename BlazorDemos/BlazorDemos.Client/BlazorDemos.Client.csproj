@@ -24,7 +24,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Pages\AllComponents.cshtml" />
+    <None Include="Pages\GreyOut.cshtml" />
     <None Include="Pages\Interop.cshtml" />
+    <None Include="Pages\PizzaElement.cshtml" />
+    <None Include="Pages\PizzaList.cshtml" />
     <None Include="Pages\PizzaPlace.cshtml" />
     <None Include="Pages\PizzaEditor.cshtml" />
     <None Include="Pages\Timer.cshtml" />
@@ -52,6 +56,38 @@
 
   <ItemGroup>
     <BlazorGenerate Remove="Pages\PizzaPlace.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="Pages\PizzaList.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Pages\PizzaList.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="Pages\GreyOut.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Pages\GreyOut.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="Pages\AllComponents.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Pages\AllComponents.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <BlazorGenerate Remove="Pages\PizzaElement.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Pages\PizzaElement.cshtml" />
   </ItemGroup>
 
 </Project>

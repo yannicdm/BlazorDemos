@@ -1,56 +1,79 @@
-﻿@page "/pizza"
-@using BlazorDemos.Shared
+﻿@using BlazorDemos.Shared
+@page "/pizza"
 
 @inject Store state
+@inject IPizzaMenuService MenuService
 
-<div class="row pizza-header">
-  <div class="col-sm-3">
-    <img src="images/pizza.png" class="center-block" />
-  </div>
-  <div class="col-sm-6">
-    <h1 class="text-center">@state.PizzaPlace.Owner's Pizza Place</h1>
-  </div>
-  <div class="col-sm-3">
-    <img src="images/pizza.png" class="center-block" />
-  </div>
-</div>
+<div class="pizza-place">
 
-<div class="row">
-  <button class="btn btn-success" @onclick(OpenEditor)>Add</button>
-</div>
+    <GreyOut IsGreyedOut="state.UI.ShowLoading">
+        <Loading/>
+    </GreyOut>
 
-@if (state.UI.ShowPizzaEditor)
-{
-  <PizzaEditor Pizza="state.PizzaPlace.Pizza"
-               SpicynessValues="state.UI.SpicynessValues"
-               OnClose="CloseEditor"></PizzaEditor>
-}
+    <div class="row pizza-header">
+        <div class="col-sm-3">
+            <img src="images/pizza.png" class="center-block" />
+        </div>
+        <div class="col-sm-6">
+            <h1 class="text-center">@state.PizzaPlace.Owner's Pizza Place</h1>
+        </div>
+        <div class="col-sm-3">
+            <img src="images/pizza.png" class="center-block" />
+        </div>
+    </div>
 
-@functions  {
+    <div class="row">
+        <button class="btn btn-success" @onclick(OpenEditor)>Add</button>
+    </div>
 
-    protected override void OnInit()
+    @if (state.PizzaPlace.Orders.Any())
     {
-      base.OnInit();
+        <!-- Be carefull here, or render will try to set ChildContent property with runtime errors -->
+        <PizzaList Pizzas="state.PizzaPlace.Orders" />
+    }
 
-      state.UI.UpdateUI = () => this.StateHasChanged();
+    @if (state.UI.ShowPizzaEditor)
+    {
+        <PizzaEditor Pizza="state.PizzaPlace.Pizza"
+                     PizzaNames="state.PizzaPlace.PizzaNames"
+                     SpicynessValues="state.UI.SpicynessValues"
+                     OnClose="CloseEditor"></PizzaEditor>
+    }
+
+</div>
+
+@functions  { 
+
+    protected override async Task OnInitAsync()
+    {
+        Console.WriteLine("Loading pizzas");
+        state.UI.ShowLoading = true;
+        state.UI.UpdateUI = () => this.StateHasChanged();
+
+        state.PizzaPlace.PizzaNames = await MenuService.GetPizzaNames();
+        state.PizzaPlace.InitPizza();
+        Console.WriteLine("Loaded pizzas");
+        state.UI.ShowLoading = false;
+        StateHasChanged();
     }
 
     void OpenEditor()
     {
-      state.UI.ShowPizzaEditor = true;
+        state.UI.ShowPizzaEditor = true;
     }
 
     void CloseEditor(Pizza pizza)
     {
-      state.UI.ShowPizzaEditor = false;
-      if( pizza != null )
-      {
-        Console.WriteLine($"Added pizza {state.PizzaPlace.Pizza.Name} - {state.PizzaPlace.Pizza.Spicyness} - {state.PizzaPlace.Pizza.Quantity}");
-
-      } else
-      {
-        Console.WriteLine("Cancelled pizza");
-      }
-      state.StateHasChanged();
+        state.UI.ShowPizzaEditor = false;
+        if (pizza != null)
+        {
+            this.state.PizzaPlace.OrderPizza();
+            Console.WriteLine($"*** Added pizza {state.PizzaPlace.Pizza.Name} - {state.PizzaPlace.Pizza.Spicyness} - {state.PizzaPlace.Pizza.Quantity}");
+        }
+        else
+        {
+            Console.WriteLine("Cancelled pizza");
+        }
+        state.StateHasChanged();
     }
 }

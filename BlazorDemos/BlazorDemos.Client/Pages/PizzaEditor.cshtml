@@ -9,7 +9,13 @@
   <div class="col-sm-4">
     <div class="form-group">
       <label for="pizza-name">Name</label>
-      <input id="pizza-name" type="text" @bind(Pizza.Name)>
+      <select id="pizza-name" @bind(Pizza.Name)>
+          @foreach(var name in PizzaNames)
+          {
+              <option value="@name">@name</option>
+
+          }
+          </select>
     </div>
   </div>
   <div class="col-sm-2">
@@ -24,7 +30,13 @@
   <div class="col-sm-3">
     <div class="form-group">
       <label for="pizza-qty">Qty</label>
-      <input id="pizza-qty" type="number" maxlength="2" @bind(Pizza.Quantity)>
+      <select id="pizza-qty" @bind(Pizza.Quantity)>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          </select>
     </div>
   </div>
   <div class="col-sm-1"> <!--filler--> </div>
@@ -39,6 +51,8 @@
 
 @functions {
     public Pizza Pizza { get; set; }
+
+    public IEnumerable<string> PizzaNames { get; set; }
 
     public IEnumerable<Spicyness> SpicynessValues { get; set; }
 

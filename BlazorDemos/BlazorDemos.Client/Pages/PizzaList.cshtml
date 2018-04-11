@@ -1,0 +1,22 @@
+﻿@using BlazorDemos.Shared
+
+<div class="pizza-list">
+    <div class="row">
+        <ul>
+            @foreach (var pizza in Pizzas)
+            {
+                <PizzaElement Pizza="pizza"/>
+            }
+        </ul>
+    </div>
+</div>
+
+
+@functions {
+
+public List<Pizza> Pizzas { get; set; }
+
+public RenderFragment ChildContent { get; set; }
+
+}
+
